@@ -1,8 +1,8 @@
 // عناصر الصفحة
 const loginScreen = document.getElementById('login-screen');
-const mainContent = document.getElementById('main-content');
 const registerScreen = document.getElementById('register-screen');
 const recoverScreen = document.getElementById('recover-screen');
+const mainContent = document.getElementById('main-content');
 
 const loginBtn = document.getElementById('login-btn');
 const registerLink = document.getElementById('register-link');
@@ -11,15 +11,13 @@ const backToLogin = document.getElementById('back-to-login');
 const backToLoginRecover = document.getElementById('back-to-login-recover');
 const createAccountBtn = document.getElementById('create-account-btn');
 
-// بيانات تسجيل دخول وهمية
-const users = [
-    { username: "user123", password: "pass123" }
-];
+// استرداد بيانات المستخدمين من Local Storage أو استخدام مصفوفة فارغة
+let users = JSON.parse(localStorage.getItem('users')) || [];
 
 // التحقق من تسجيل الدخول
 loginBtn.addEventListener('click', () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
     const user = users.find(u => u.username === username && u.password === password);
     if (user) {
@@ -30,19 +28,19 @@ loginBtn.addEventListener('click', () => {
     }
 });
 
-// التنقل إلى إنشاء حساب
+// الانتقال إلى شاشة إنشاء حساب
 registerLink.addEventListener('click', () => {
     loginScreen.classList.add('hidden');
     registerScreen.classList.remove('hidden');
 });
 
-// العودة من إنشاء الحساب
+// العودة إلى تسجيل الدخول
 backToLogin.addEventListener('click', () => {
     registerScreen.classList.add('hidden');
     loginScreen.classList.remove('hidden');
 });
 
-// التنقل إلى استرداد الحساب
+// الانتقال إلى شاشة استرداد الحساب
 recoverLink.addEventListener('click', () => {
     loginScreen.classList.add('hidden');
     recoverScreen.classList.remove('hidden');
@@ -56,15 +54,34 @@ backToLoginRecover.addEventListener('click', () => {
 
 // إنشاء حساب جديد
 createAccountBtn.addEventListener('click', () => {
-    const newUsername = document.getElementById('new-username').value;
-    const newPassword = document.getElementById('new-password').value;
+    const newUsername = document.getElementById('new-username').value.trim();
+    const newPassword = document.getElementById('new-password').value.trim();
 
     if (newUsername && newPassword) {
-        users.push({ username: newUsername, password: newPassword });
-        alert("تم إنشاء الحساب بنجاح!");
-        registerScreen.classList.add('hidden');
-        loginScreen.classList.remove('hidden');
+        const existingUser = users.find(u => u.username === newUsername);
+        if (existingUser) {
+            alert("اسم المستخدم موجود بالفعل. يرجى اختيار اسم مستخدم آخر.");
+        } else {
+            users.push({ username: newUsername, password: newPassword });
+            localStorage.setItem('users', JSON.stringify(users)); // حفظ البيانات في Local Storage
+            alert("تم إنشاء الحساب بنجاح!");
+            registerScreen.classList.add('hidden');
+            loginScreen.classList.remove('hidden');
+        }
     } else {
         alert("يرجى إدخال اسم المستخدم وكلمة المرور.");
+    }
+});
+
+// استرداد الحساب
+document.getElementById('recover-account-btn').addEventListener('click', () => {
+    const recoverUsername = document.getElementById('recover-username').value.trim();
+    const recoverEmail = document.getElementById('recover-email').value.trim();
+
+    const user = users.find(u => u.username === recoverUsername);
+    if (user) {
+        alert(`تم استرداد الحساب بنجاح! اسم المستخدم: ${user.username}`);
+    } else {
+        alert("لا يوجد حساب بهذا الاسم. يرجى التأكد من البيانات.");
     }
 });

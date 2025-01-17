@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>تسجيل الدخول</title>
+    <title>واجهة تسجيل الدخول</title>
 </head>
 <body>
     <!-- شاشة تسجيل الدخول -->
@@ -14,44 +14,44 @@
             <input type="text" id="username" placeholder="اسم المستخدم" required>
             <input type="password" id="password" placeholder="كلمة المرور" required>
             <button id="login-btn">دخول</button>
-            <p>لا تمتلك حسابًا؟ <span id="register-link">إنشاء حساب</span></p>
-            <p>هل نسيت حسابك؟ <span id="recover-link">استرداد الحساب</span></p>
+            <p>لا تمتلك حسابًا؟ <span id="register-link" class="link">إنشاء حساب</span></p>
+            <p>هل نسيت حسابك؟ <span id="recover-link" class="link">استرداد الحساب</span></p>
         </div>
     </div>
 
-    <!-- محتوى الموقع -->
-    <div id="main-content" class="hidden">
-        <header>
-            <h1>مرحبًا بك في موقعنا</h1>
-        </header>
-        <main>
-            <section id="home">
-                <h2>الخدمات الرئيسية</h2>
-                <p>استكشف خدماتنا المميزة.</p>
-            </section>
-        </main>
-    </div>
-
-    <!-- صفحة إنشاء الحساب -->
+    <!-- شاشة إنشاء الحساب -->
     <div id="register-screen" class="overlay hidden">
         <div class="login-container">
-            <h1>إنشاء حساب جديد</h1>
+            <h1>إنشاء حساب</h1>
             <input type="text" id="new-username" placeholder="اسم المستخدم الجديد" required>
             <input type="password" id="new-password" placeholder="كلمة المرور" required>
             <button id="create-account-btn">إنشاء</button>
-            <p>لديك حساب بالفعل؟ <span id="back-to-login">العودة لتسجيل الدخول</span></p>
+            <p>لديك حساب بالفعل؟ <span id="back-to-login" class="link">العودة لتسجيل الدخول</span></p>
         </div>
     </div>
 
-    <!-- صفحة استرداد الحساب -->
+    <!-- شاشة استرداد الحساب -->
     <div id="recover-screen" class="overlay hidden">
         <div class="login-container">
             <h1>استرداد الحساب</h1>
             <input type="text" id="recover-username" placeholder="اسم المستخدم" required>
             <input type="email" id="recover-email" placeholder="البريد الإلكتروني" required>
             <button id="recover-account-btn">استرداد</button>
-            <p>تذكرت بياناتك؟ <span id="back-to-login-recover">العودة لتسجيل الدخول</span></p>
+            <p>تذكرت بياناتك؟ <span id="back-to-login-recover" class="link">العودة لتسجيل الدخول</span></p>
         </div>
+    </div>
+
+    <!-- المحتوى الرئيسي بعد تسجيل الدخول -->
+    <div id="main-content" class="hidden">
+        <header>
+            <h1>مرحبًا بك في موقعنا</h1>
+        </header>
+        <main>
+            <section>
+                <h2>الخدمات</h2>
+                <p>استكشف خدماتنا المميزة التي تلبي جميع احتياجاتك.</p>
+            </section>
+        </main>
     </div>
 
     <script src="script.js"></script>
